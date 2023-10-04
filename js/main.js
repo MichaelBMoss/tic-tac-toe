@@ -10,8 +10,9 @@ const gameData = {
     br: 'blank',
 }
 
-let turn = 'X'
-let winner = document.getElementById('winner')
+let turn = 'X';
+let turnCount = 0;
+let winner = document.getElementById('winner');
 let gameBoardEl = document.getElementById('gameboard');
 let instructions = document.getElementById('instructions');
 
@@ -54,26 +55,39 @@ function evaluateBoard() {
       (gameData.tl === turn && gameData.mm === turn && gameData.br === turn) ||
       (gameData.tr === turn && gameData.mm === turn && gameData.bl === turn)
     ) {
+        console.log('win');
       win();
       return;
     }
-    if (turn === 'X') {
-        turn = 'O'
-    } else if (turn === 'O') {
-        turn = 'X'
-    }    
-    instructions.innerText = `It's ${turn}'s turn`;
+    nextTurn();
+    if (turnCount == 9) {
+        closeBoard();
+        winner.innerText = "Cat's Game!"
+    };
   }
   
-function win() {
-    console.log('win');
+function nextTurn() {
+    if (turn === 'X') {
+        turn = 'O';
+    } else if (turn === 'O') {
+        turn = 'X';
+    }    
+    instructions.innerText = `It's ${turn}'s turn`;
+    turnCount++;
+
+}
+
+function closeBoard() {
     for (let property in gameData) {
         gameData[property] = 'finished';
-    let winnerText = `${turn} Wins!`
-        writeWinner(winnerText);
-        gameBoardEl.classList.remove('pointer');
     };
-}
+};
+
+function win() {
+    closeBoard();
+    writeWinner(`${turn} Wins!`);
+    gameBoardEl.classList.remove('pointer');
+};
 
 function writeWinner(winnerSpanContent) {
     winner.innerText = winnerSpanContent;
@@ -93,4 +107,5 @@ document.getElementById("start-over").onclick = function() {
         gameSquare.innerText = '';
     };
     instructions.innerText = 'X goes first. Click a square to begin!'
+    turnCount = 0;
 };
