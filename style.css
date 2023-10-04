@@ -3,10 +3,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #8a090e;
+    color: #f16832;
 }
+
 
 #instructions {
     margin-top: -12px;
+    font-size: 18px;
 }
 
 
@@ -20,6 +24,10 @@ body {
     border: 2px solid black;
 }
 
+.pointer:hover {
+    cursor: pointer;
+}
+
 .game-square {
     width: 110px;
     height: 110px;
@@ -31,27 +39,29 @@ body {
     font-family: Arial, sans-serif;
 }
 
+
+
 /* button elements */
 
-#reset {
+#start-over {
     margin-top: 15px;
-    padding: 2px 3px 2px 3px;
-}
-
-#reset:hover {
-    border: solid 1px black;
     padding: 3px 4px 3px 4px;
-    cursor:pointer
+    color: #fab37b;
+    background-color: black;
+    font-size: 18px;
 }
 
-/*
+/* win text */
 
-.winner {
-    font-size: 300px;
+#winner {
+    font-size:165px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
+    white-space: nowrap;
+    overflow: visible;
+    color: #fab37b;
+    text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000;
 
-*/
+}

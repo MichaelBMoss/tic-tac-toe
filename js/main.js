@@ -64,10 +64,22 @@ function evaluateBoard() {
     }    
   }
   
-
 function win() {
     console.log('win');
     for (let property in gameData) {
-        gameData[property] = 'blank';
+        gameData[property] = 'finished';
+    let winner = document.getElementById('winner')
+    winner.innerText = `${turn} Wins!`
+    gameBoardEl.classList.remove('pointer');
     };
 }
+
+/*
+document.getElementById("start-over").onclick = function() {
+    for (let property in gameData) {
+        gameData[property] = 'blank';
+    turn = 'X'
+
+};
+
+*/
