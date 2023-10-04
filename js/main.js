@@ -68,18 +68,28 @@ function win() {
     console.log('win');
     for (let property in gameData) {
         gameData[property] = 'finished';
-    let winner = document.getElementById('winner')
-    winner.innerText = `${turn} Wins!`
-    gameBoardEl.classList.remove('pointer');
+    let winnerText = `${turn} Wins!`
+        writeWinner(winnerText);
+        gameBoardEl.classList.remove('pointer');
     };
 }
 
-/*
+function writeWinner(winnerSpanContent) {
+    let winner = document.getElementById('winner')
+    winner.innerText = winnerSpanContent;
+};
+
+
 document.getElementById("start-over").onclick = function() {
     for (let property in gameData) {
         gameData[property] = 'blank';
+    };
     turn = 'X'
-
+    writeWinner('');
+    gameBoardEl.classList.add('pointer');
+    let gameSquares = document.querySelectorAll('.game-square');
+    console.log(gameSquares)
+    for (let gameSquare of gameSquares) {
+        gameSquare.innerText = '';
+    };
 };
-
-*/
