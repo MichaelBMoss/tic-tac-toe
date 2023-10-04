@@ -5,21 +5,33 @@ body {
     align-items: center;
 }
 
+#instructions {
+    margin-top: -12px;
+}
+
+
+/* board elements */
+
 #gameboard {
-    margin-top: 30px;
-    width: 420px;
-    height: 420px;
+    width: 342px;
+    height: 342px;
     display: flex;
     flex-wrap: wrap;
     border: 2px solid black;
-
 }
 
 .game-square {
-    width: 136px;
-    height: 136px;
+    width: 110px;
+    height: 110px;
     border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    font-family: Arial, sans-serif;
 }
+
+/* button elements */
 
 #reset {
     margin-top: 15px;
@@ -29,4 +41,17 @@ body {
 #reset:hover {
     border: solid 1px black;
     padding: 3px 4px 3px 4px;
+    cursor:pointer
 }
+
+/*
+
+.winner {
+    font-size: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+*/
