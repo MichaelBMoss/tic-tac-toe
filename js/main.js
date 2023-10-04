@@ -11,8 +11,9 @@ const gameData = {
 }
 
 let turn = 'X'
-
+let winner = document.getElementById('winner')
 let gameBoardEl = document.getElementById('gameboard');
+let instructions = document.getElementById('instructions');
 
 gameBoardEl.addEventListener('click', function(gameBoardInfo) {
     let clickedSquare = gameBoardInfo.target;
@@ -43,7 +44,6 @@ function updateGameData(clickedSquare) {
 };
 
 function evaluateBoard() {
-  
     if (
       (gameData.tl === turn && gameData.tm === turn && gameData.tr === turn) ||
       (gameData.ml === turn && gameData.mm === turn && gameData.mr === turn) ||
@@ -62,6 +62,7 @@ function evaluateBoard() {
     } else if (turn === 'O') {
         turn = 'X'
     }    
+    instructions.innerText = `It's ${turn}'s turn`;
   }
   
 function win() {
@@ -75,7 +76,6 @@ function win() {
 }
 
 function writeWinner(winnerSpanContent) {
-    let winner = document.getElementById('winner')
     winner.innerText = winnerSpanContent;
 };
 
@@ -92,4 +92,5 @@ document.getElementById("start-over").onclick = function() {
     for (let gameSquare of gameSquares) {
         gameSquare.innerText = '';
     };
+    instructions.innerText = 'X goes first. Click a square to begin!'
 };
