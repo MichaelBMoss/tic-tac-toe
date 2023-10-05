@@ -1,3 +1,5 @@
+//variables to be manipulated
+
 const gameData = {
     tl: 'blank',
     tm: 'blank',
@@ -10,38 +12,72 @@ const gameData = {
     br: 'blank',
 }
 
-let turn = 'X';
-let turnCount = 0;
+let turn;
+let turnCount;
+
+//variables that represent elements
+
 let winner = document.getElementById('winner');
 let gameBoardEl = document.getElementById('gameboard');
 let instructions = document.getElementById('instructions');
 
-gameBoardEl.addEventListener('click', function(gameBoardInfo) {
-    let clickedSquare = gameBoardInfo.target;
-    handleClick(clickedSquare);
-});
+//functions
 
-function handleClick(clickedSquare) {
+//initialize the app
+
+function initialize() {
+    for (let property in gameData) {
+        gameData[property] = 'blank';
+    };
+    turn = 'X'
+    turnCount = 0;
+    write(winner, '')
+    gameBoardEl.classList.add('pointer');
+    let gameSquares = document.querySelectorAll('.game-square');
+    for (let gameSquare of gameSquares) {
+        gameSquare.innerText = '';
+    };
+    write(instructions, 'X goes first. Click a square to begin!')
+    turnCount = 0;
+};
+
+//general shortcut functions. For dryness.
+
+function write(location, content) {
+    location.innerText = content;
+};
+
+function closeBoard() {
+    for (let property in gameData) {
+        gameData[property] = 'closed';
+    };
+};
+
+//handle user interaction
+
+//clicks on the board
+
+gameBoardEl.addEventListener('click', function(getGameBoardInfo) {
+    //get the square that was clicked on
+    let clickedSquare = getGameBoardInfo.target;
+    //user can only interact with empty squares
+    //If the clicked square is empty, proceed
     let clickedSquareId = clickedSquare.id;
     if (gameData[clickedSquareId] == 'blank') {
         runGame(clickedSquare);
     };
-};
+});
 
 function runGame(clickedSquare) {
-    updateDisplay(clickedSquare);
+    write(clickedSquare, turn);
     updateGameData(clickedSquare);
     evaluateBoard();
 };    
 
-function updateDisplay(clickedSquare) {
-    clickedSquare.innerText = turn;
-};
-
+//update board data to be able to evaluate for win or tie
 function updateGameData(clickedSquare) {
     let clickedSquareId = clickedSquare.id;
     gameData[clickedSquareId] = turn;
-    console.log(gameData);
 };
 
 function evaluateBoard() {
@@ -55,16 +91,19 @@ function evaluateBoard() {
       (gameData.tl === turn && gameData.mm === turn && gameData.br === turn) ||
       (gameData.tr === turn && gameData.mm === turn && gameData.bl === turn)
     ) {
-        console.log('win');
       win();
       return;
     }
-    nextTurn();
+    nextTurn(); 
+    tie();
+}
+
+function tie() {
     if (turnCount == 9) {
         closeBoard();
-        winner.innerText = "Cat's Game!"
+        write(winner, "Cat's Game!") 
     };
-  }
+};  
   
 function nextTurn() {
     if (turn === 'X') {
@@ -72,40 +111,19 @@ function nextTurn() {
     } else if (turn === 'O') {
         turn = 'X';
     }    
-    instructions.innerText = `It's ${turn}'s turn`;
+   write(instructions, `It's ${turn}'s turn`);
     turnCount++;
-
 }
-
-function closeBoard() {
-    for (let property in gameData) {
-        gameData[property] = 'finished';
-    };
-};
 
 function win() {
     closeBoard();
-    writeWinner(`${turn} Wins!`);
+    write(winner, `${turn} Wins!`)
     gameBoardEl.classList.remove('pointer');
 };
 
-function writeWinner(winnerSpanContent) {
-    winner.innerText = winnerSpanContent;
-};
-
-
+//start over button rets by intializing
 document.getElementById("start-over").onclick = function() {
-    for (let property in gameData) {
-        gameData[property] = 'blank';
-    };
-    turn = 'X'
-    writeWinner('');
-    gameBoardEl.classList.add('pointer');
-    let gameSquares = document.querySelectorAll('.game-square');
-    console.log(gameSquares)
-    for (let gameSquare of gameSquares) {
-        gameSquare.innerText = '';
-    };
-    instructions.innerText = 'X goes first. Click a square to begin!'
-    turnCount = 0;
+    initialize();
 };
+
+initialize();
