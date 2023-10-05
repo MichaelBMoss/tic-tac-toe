@@ -51,6 +51,7 @@ function closeBoard() {
     for (let property in gameData) {
         gameData[property] = 'closed';
     };
+    gameBoardEl.classList.remove('pointer');
 };
 
 //handle user interaction
@@ -101,7 +102,8 @@ function evaluateBoard() {
 function tie() {
     if (turnCount == 9) {
         closeBoard();
-        write(winner, "Cat's Game!") 
+        write(winner, "Cat's Game!");
+
     };
 };  
   
@@ -118,7 +120,6 @@ function nextTurn() {
 function win() {
     closeBoard();
     write(winner, `${turn} Wins!`)
-    gameBoardEl.classList.remove('pointer');
 };
 
 //start over button rets by intializing

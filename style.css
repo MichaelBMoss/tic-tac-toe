@@ -7,14 +7,10 @@ body {
     color: #f16832;
 }
 
-
 #instructions {
     margin-top: -12px;
     font-size: 18px;
 }
-
-
-/* board elements */
 
 #gameboard {
     width: 342px;
@@ -39,10 +35,6 @@ body {
     font-family: Arial, sans-serif;
 }
 
-
-
-/* button elements */
-
 #start-over {
     margin-top: 15px;
     padding: 3px 4px 3px 4px;
@@ -50,8 +42,6 @@ body {
     background-color: black;
     font-size: 18px;
 }
-
-/* win text */
 
 #winner {
     font-size:165px;
@@ -63,5 +53,4 @@ body {
     overflow: visible;
     color: #fab37b;
     text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000;
-
 }
